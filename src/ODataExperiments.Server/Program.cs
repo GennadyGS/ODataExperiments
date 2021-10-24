@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.OData;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services
     .AddControllers()
     .AddOData(options =>
     {
+        options.AddRouteComponents("odata", GetEdmModel());
         options.EnableQueryFeatures();
     });
 
@@ -33,3 +36,11 @@ app.MapControllers();
 app.UseODataRouteDebug();
 
 app.Run();
+
+IEdmModel GetEdmModel()
+{
+    var builder = new ODataConventionModelBuilder();
+    builder.EntitySet<Record>("Records");
+    return builder.GetEdmModel();
+}
+
