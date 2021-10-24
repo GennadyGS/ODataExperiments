@@ -2,14 +2,14 @@
 
 public sealed class Record
 {
-    public Record(int rowId, IDictionary<string, object> properties)
+    public Record(int id, IDictionary<string, object> properties)
     {
-        RowId = rowId;
+        Id = id;
         Properties = properties;
     }
 
     [Key]
-    public int RowId { get; set; }
+    public int Id { get; set; }
 
     public IDictionary<string, object> Properties { get; }
 }
