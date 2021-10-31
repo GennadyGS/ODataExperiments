@@ -18,11 +18,7 @@ internal static class RecordsGenerator
             .Generate(recordCount);
 
     private static Record GenerateRecord(Faker faker, int fieldCount) =>
-        new()
-        {
-            Id = faker.IndexFaker,
-            Properties = GenerateProperties(faker, fieldCount),
-        };
+        new (faker.IndexFaker, GenerateProperties(faker, fieldCount));
 
     private static IDictionary<string, object> GenerateProperties(
         Faker faker, int fieldCount) =>

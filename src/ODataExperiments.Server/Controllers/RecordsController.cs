@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace ODataExperiments.Server.Controllers;
 
-public class RecordsController : ODataController
+public sealed class RecordsController : ODataController
 {
     [EnableQuery]
     public IReadOnlyCollection<Record> GetRecords() => RecordsProvider.Records;
