@@ -11,8 +11,4 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     </ItemGroup>
-
-    <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="$(Configuration) == 'Debug' And '$(OS)' == 'Windows_NT'">
-        <Exec Command="IF EXIST &quot;$(SolutionDir)\.vs\ODataExperiments\config\applicationhost.config&quot; (pushd &quot;$(SolutionDir).vs\ODataExperiments\config\&quot; &amp; copy /b applicationhost.config +,, &amp; popd)" />
-    </Target>
 </Project>
