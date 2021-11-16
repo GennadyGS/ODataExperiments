@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
+using ODataExperiments.Server;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +38,7 @@ app.UseODataRouteDebug();
 
 app.Run();
 
-IEdmModel GetEdmModel()
+static IEdmModel GetEdmModel()
 {
     var builder = new ODataConventionModelBuilder();
     builder.EntitySet<Record>("Records");

@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+namespace ODataExperiments.Server;
+
 public sealed class Record
 {
     public Record(int id, IDictionary<string, object> properties)
