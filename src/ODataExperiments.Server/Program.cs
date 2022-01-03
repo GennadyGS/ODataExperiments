@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
+using Newtonsoft.Json;
 using ODataExperiments.Server;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+        options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+        options.SerializerSettings.FloatParseHandling = FloatParseHandling.Decimal;
+    })
     .AddOData(options =>
     {
         options.AddRouteComponents("odata", GetEdmModel());
