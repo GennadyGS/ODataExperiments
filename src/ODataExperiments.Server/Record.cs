@@ -12,7 +12,7 @@ public sealed class Record
     }
 
     [Key]
-    public int Id { get; init; }
+    public int Id { get; set; }
 
-    public IDictionary<string, object> Properties { get; init; }
+    public IDictionary<string, object> Properties { get; set; }
 }
