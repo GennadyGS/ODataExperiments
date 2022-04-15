@@ -1,4 +1,7 @@
-﻿namespace ODataExperiments.Server
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace ODataExperiments.Server
 {
     internal static class RecordsProvider
     {
