@@ -7,5 +7,5 @@ public sealed class DictionariesController : Controller
 {
     [HttpGet]
     public IReadOnlyCollection<IDictionary<string, object>> GetDictionaries() => 
-        RecordsProvider.Dictionariess;
+        RecordsProvider.Dictionaries;
 }

@@ -8,7 +8,7 @@
         public static IReadOnlyCollection<Record> Records { get; } =
             RecordsGenerator.GenerateRecords(RecordCount, FieldCount);
 
-        public static IReadOnlyCollection<IDictionary<string, object>> Dictionariess { get; } =
+        public static IReadOnlyCollection<IDictionary<string, object>> Dictionaries { get; } =
             Records
                 .Select(r => 
                     new[] { KeyValuePair.Create(nameof(Record.Id), (object)r.Id) }
