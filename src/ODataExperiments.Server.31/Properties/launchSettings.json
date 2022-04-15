@@ -12,7 +12,7 @@
     "ODataExperiments": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:44365;http://localhost:43389",
       "environmentVariables": {
