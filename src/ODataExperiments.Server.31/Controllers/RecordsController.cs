@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.OData.Query;
-using Microsoft.AspNetCore.OData.Routing.Controllers;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ODataExperiments.Server.Controllers;
 

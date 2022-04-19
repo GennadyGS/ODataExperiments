@@ -1,11 +1,12 @@
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OData.Edm;
-using Microsoft.OData.ModelBuilder;
 using Newtonsoft.Json;
 
 namespace ODataExperiments.Server
@@ -22,21 +23,26 @@ namespace ODataExperiments.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers()
+                .AddControllers(options =>
+                {
+                    // Endpoint routing is not supported by OData
+                    options.EnableEndpointRouting = false;
+                    options.AllowEmptyInputInBodyModelBinding = true;
+                })
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                     options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                     options.SerializerSettings.FloatParseHandling = FloatParseHandling.Decimal;
-                })
-                .AddOData(options =>
+                });
+
+            services.AddOData()
+                .Services.AddSingleton(new ODataOptions
                 {
-                    options.AddRouteComponents("odata", GetEdmModel());
-                    options.EnableQueryFeatures();
+                    NullDynamicPropertyIsEnabled = true,
                 });
 
             services.AddSwaggerGen();
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -54,12 +60,10 @@ namespace ODataExperiments.Server
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+           app.UseMvc(builder =>
             {
-                endpoints.MapControllers();
+                builder.MapODataServiceRoute("OdataRoute", "odata", GetEdmModel());
             });
-
-            app.UseODataRouteDebug();
         }
 
         private static IEdmModel GetEdmModel()
