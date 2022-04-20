@@ -60,7 +60,7 @@ namespace ODataExperiments.Server
 
             app.UseAuthorization();
 
-           app.UseMvc(builder =>
+            app.UseMvc(builder =>
             {
                 builder.MapODataServiceRoute("OdataRoute", "odata", GetEdmModel());
             });
@@ -72,6 +72,5 @@ namespace ODataExperiments.Server
             builder.EntitySet<Record>("Records");
             return builder.GetEdmModel();
         }
-
     }
 }
