@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Formatter.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OData.Edm;
@@ -21,7 +22,11 @@ builder.Services
     })
     .AddOData(options =>
     {
-        options.AddRouteComponents("odata", GetEdmModel());
+        options.AddRouteComponents(
+            "odata",
+            GetEdmModel(),
+            services => services
+                .AddSingleton<IODataSerializerProvider, AddTypeAnnotationSerializerProvider>());
         options.EnableQueryFeatures();
     });
 
