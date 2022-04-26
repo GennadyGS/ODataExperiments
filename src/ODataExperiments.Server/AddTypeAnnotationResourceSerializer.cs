@@ -6,11 +6,12 @@ namespace ODataExperiments.Server;
 
 public sealed class AddTypeAnnotationResourceSerializer : ODataResourceSerializer
 {
-    public AddTypeAnnotationResourceSerializer(IODataSerializerProvider p)
-        : base(p)
+    public AddTypeAnnotationResourceSerializer(IODataSerializerProvider provider)
+        : base(provider)
     { }
 
-    public override ODataResource CreateResource(SelectExpandNode selectExpandNode, ResourceContext resourceContext)
+    public override ODataResource CreateResource(
+        SelectExpandNode selectExpandNode, ResourceContext resourceContext)
     {
         var resource = base.CreateResource(selectExpandNode, resourceContext);
         foreach (var prop in resource.Properties)
