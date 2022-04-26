@@ -14,9 +14,9 @@ public sealed class AddTypeAnnotationResourceSerializer : ODataResourceSerialize
         SelectExpandNode selectExpandNode, ResourceContext resourceContext)
     {
         var resource = base.CreateResource(selectExpandNode, resourceContext);
-        foreach (var prop in resource.Properties)
+        foreach (var property in resource.Properties)
         {
-            prop.TypeAnnotation = new ODataTypeAnnotation(null);
+            property.TypeAnnotation = null;
         }
 
         return resource;
