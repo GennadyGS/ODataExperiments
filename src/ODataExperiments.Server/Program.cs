@@ -25,7 +25,8 @@ builder.Services
         options.AddRouteComponents(
             "odata",
             GetEdmModel(),
-            services => services.AddSingleton<ODataPrimitiveSerializer, RemoveTypeAnnotationsPrimitiveSerializer>()
+            services => services
+                .AddSingleton<ODataPrimitiveSerializer, RemoveTypeAnnotationsPrimitiveSerializer>()
         );
         options.EnableQueryFeatures();
     });

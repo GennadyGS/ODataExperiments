@@ -4,7 +4,7 @@ using Microsoft.OData.Edm;
 
 namespace ODataExperiments.Server;
 
-public sealed class RemoveTypeAnnotationsPrimitiveSerializer : ODataPrimitiveSerializer
+internal sealed class RemoveTypeAnnotationsPrimitiveSerializer : ODataPrimitiveSerializer
 {
     public override ODataPrimitiveValue CreateODataPrimitiveValue(
         object graph, IEdmPrimitiveTypeReference primitiveType,
