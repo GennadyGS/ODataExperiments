@@ -2,7 +2,7 @@
 using Microsoft.OData;
 using Microsoft.OData.Edm;
 
-namespace ODataExperiments.Server;
+namespace ODataExperiments.Server.Serializers;
 
 internal sealed class RemoveTypeAnnotationsPrimitiveSerializer : ODataPrimitiveSerializer
 {

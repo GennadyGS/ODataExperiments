@@ -6,7 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Newtonsoft.Json;
-using ODataExperiments.Server;
+using ODataExperiments.Server.Models;
+using ODataExperiments.Server.Serializers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +26,8 @@ builder.Services
         options.AddRouteComponents(
             "odata",
             GetEdmModel(),
-            services => services
-                .AddSingleton<ODataPrimitiveSerializer, RemoveTypeAnnotationsPrimitiveSerializer>()
+            services => ServiceCollectionServiceExtensions
+                .AddSingleton<ODataPrimitiveSerializer, RemoveTypeAnnotationsPrimitiveSerializer>(services)
         );
         options.EnableQueryFeatures();
     });
@@ -52,12 +53,12 @@ app.MapControllers();
 
 app.UseODataRouteDebug();
 
-app.Run();
+await app.RunAsync();
 
 static IEdmModel GetEdmModel()
 {
     var builder = new ODataConventionModelBuilder();
     builder.EntitySet<Record>("Records");
+    builder.EntitySet<City>("Cities");
     return builder.GetEdmModel();
 }
-

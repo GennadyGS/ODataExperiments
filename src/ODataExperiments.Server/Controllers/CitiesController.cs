@@ -6,8 +6,8 @@ using ODataExperiments.Server.Providers;
 
 namespace ODataExperiments.Server.Controllers;
 
-public sealed class RecordsController : ODataController
+public sealed class CitiesController : ODataController
 {
     [EnableQuery]
-    public IReadOnlyCollection<Record> GetRecords() => RecordsProvider.Records;
+    public IReadOnlyCollection<City> GetCities() => CitiesProvider.Cities;
 }

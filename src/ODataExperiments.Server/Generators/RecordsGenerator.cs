@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bogus;
+using ODataExperiments.Server.Models;
 
-namespace ODataExperiments.Server;
+namespace ODataExperiments.Server.Generators;
 
 internal static class RecordsGenerator
 {
@@ -21,7 +22,11 @@ internal static class RecordsGenerator
             .Generate(recordCount);
 
     private static Record GenerateRecord(Faker faker, int fieldCount) =>
-        new (faker.IndexFaker, GenerateProperties(faker, fieldCount));
+        new()
+        {
+            Id = faker.IndexFaker,
+            Properties = GenerateProperties(faker, fieldCount),
+        };
 
     private static IDictionary<string, object> GenerateProperties(
         Faker faker, int fieldCount) =>
