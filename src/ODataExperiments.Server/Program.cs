@@ -14,20 +14,23 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services
+    .AddCors(options =>
+        options.AddDefaultPolicy(policy => policy.WithOrigins("*")))
     .AddControllers()
     .AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
         options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
         options.SerializerSettings.FloatParseHandling = FloatParseHandling.Decimal;
+        options.UseCamelCasing(true);
     })
     .AddOData(options =>
     {
         options.AddRouteComponents(
             "odata",
             GetEdmModel(),
-            services => ServiceCollectionServiceExtensions
-                .AddSingleton<ODataPrimitiveSerializer, RemoveTypeAnnotationsPrimitiveSerializer>(services)
+            services => services
+                .AddSingleton<ODataPrimitiveSerializer, RemoveTypeAnnotationsPrimitiveSerializer>()
         );
         options.EnableQueryFeatures();
     });
@@ -45,7 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors();
 
 app.UseAuthorization();
 
@@ -58,6 +61,7 @@ await app.RunAsync();
 static IEdmModel GetEdmModel()
 {
     var builder = new ODataConventionModelBuilder();
+    builder.EnableLowerCamelCase();
     builder.EntitySet<Record>("Records");
     builder.EntitySet<City>("Cities");
     return builder.GetEdmModel();
