@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.OData.Formatter.Serialization;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,6 +57,7 @@ app.MapControllers();
 
 app.UseODataRouteDebug();
 
+app.UsePathBase(new PathString("/api"));
 await app.RunAsync();
 
 static IEdmModel GetEdmModel()

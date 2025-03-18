@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using ODataExperiments.Server.Models;
 using ODataExperiments.Server.Providers;
 
-namespace ODataExperiments.Server.Controllers;
+namespace ODataExperiments.Server.Controllers.OData;
 
 public sealed class CitiesController : ODataController
 {
     [EnableQuery]
-    public IReadOnlyCollection<City> GetCities() => CitiesProvider.Cities;
+    public IReadOnlyCollection<City> GetCities() =>
+        CitiesProvider.GetCities(new CityDataApiRequest()).Result;
 }

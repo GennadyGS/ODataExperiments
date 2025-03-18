@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using ODataExperiments.Server.Providers;
 
-namespace ODataExperiments.Server.Controllers;
+namespace ODataExperiments.Server.Controllers.Api;
 
 [Route("[controller]")]
 public sealed class DictionariesController : Controller
 {
     [HttpGet]
-    public IReadOnlyCollection<IDictionary<string, object>> GetDictionaries() => 
+    public IReadOnlyCollection<IDictionary<string, object>> GetDictionaries() =>
         RecordsProvider.Dictionaries;
 }
