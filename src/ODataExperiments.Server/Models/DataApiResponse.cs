@@ -5,7 +5,7 @@ namespace ODataExperiments.Server.Models;
 
 public sealed record DataApiResponse<T>
 {
-    public IReadOnlyCollection<T> Result { get; init; } = Array.Empty<T>();
+    public IReadOnlyCollection<T> Result { get; init; } = [];
 
     public int Count { get; init; } = 0;
 }
